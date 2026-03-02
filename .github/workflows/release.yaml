@@ -1,0 +1,44 @@
+name: Release Terraform Provider
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: ./go.mod
+
+      - name: Build Terraform provider
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/}
+          mkdir -p release
+          # Linux
+          GOOS=linux GOARCH=amd64 go build -o release/terraform-provider-krutrim_${VERSION}_linux_amd64
+          zip -j release/terraform-provider-krutrim_${VERSION}_linux_amd64.zip release/terraform-provider-krutrim_${VERSION}_linux_amd64
+          # macOS
+          GOOS=darwin GOARCH=amd64 go build -o release/terraform-provider-krutrim_${VERSION}_darwin_amd64
+          zip -j release/terraform-provider-krutrim_${VERSION}_darwin_amd64.zip release/terraform-provider-krutrim_${VERSION}_darwin_amd64
+          # Windows
+          GOOS=windows GOARCH=amd64 go build -o release/terraform-provider-krutrim_${VERSION}_windows_amd64.exe
+          zip -j release/terraform-provider-krutrim_${VERSION}_windows_amd64.zip release/terraform-provider-krutrim_${VERSION}_windows_amd64.exe
+
+      - name: Generate SHA256SUMS
+        run: |
+          cd release
+          shasum -a 256 *.zip > SHA256SUMS
+
+      - name: Create GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ github.ref_name }}
+          files: release/*

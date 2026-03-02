@@ -1,0 +1,7 @@
+.prism.log
+dist/
+terraform-provider-Krutrim
+.examples/provider/.terraform/
+.examples/provider/.terraform.lock.hcl
+.examples/provider/provider.tf
+
