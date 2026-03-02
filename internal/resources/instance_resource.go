@@ -12,7 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 
-	krutrim "github.com/ola-silicon/krutrim-go-sdk"
+	krutrim "github.com/ola-krutrim/krutrim-go-sdk"
 )
 
 var (

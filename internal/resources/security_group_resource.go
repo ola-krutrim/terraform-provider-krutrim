@@ -9,8 +9,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	krutrim "github.com/ola-silicon/krutrim-go-sdk"
-	"github.com/ola-silicon/krutrim-go-sdk/packages/param"
+	krutrim "github.com/ola-krutrim/krutrim-go-sdk"
+	"github.com/ola-krutrim/krutrim-go-sdk/packages/param"
 )
 
 type SecurityGroupModel struct {

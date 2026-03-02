@@ -1,4 +1,4 @@
-module github.com/ola-silicon/krutrim-terraform
+module github.com/ola-krutrim/krutrim-terraform
 
 go 1.24.0
 
@@ -10,7 +10,7 @@ require (
 	github.com/hashicorp/terraform-plugin-framework-timetypes v0.5.0
 	github.com/hashicorp/terraform-plugin-go v0.28.0
 	github.com/hashicorp/terraform-plugin-log v0.9.0
-	github.com/ola-silicon/krutrim-go-sdk v0.0.6
+	github.com/ola-krutrim/krutrim-go-sdk v0.1.1
 	github.com/tidwall/gjson v1.18.0
 	github.com/tidwall/sjson v1.2.5
 )

@@ -137,8 +137,8 @@ github.com/mitchellh/reflectwalk v1.0.2 h1:G2LzWKi524PWgd3mLHV8Y5k7s6XUvT0Gef6zx
 github.com/mitchellh/reflectwalk v1.0.2/go.mod h1:mSTlrgnPZtwu0c4WaC2kGObEpuNDbx0jmZXqmk4esnw=
 github.com/oklog/run v1.0.0 h1:Ru7dDtJNOyC66gQ5dQmaCa0qIsAUFY3sFpK1Xk8igrw=
 github.com/oklog/run v1.0.0/go.mod h1:dlhp/R75TPv97u0XWUtDeV/lRKWPKSdTuV0TZvrmrQA=
-github.com/ola-silicon/krutrim-go-sdk v0.0.6 h1:A3GB2gfwtFNuRsXnqCJfVtfFdx5nd9eI9JTRPIJbS+c=
-github.com/ola-silicon/krutrim-go-sdk v0.0.6/go.mod h1:sm3jWlTHu2B8JJEy/rUJNJM17AvSUH56bPrJtTwSXj4=
+github.com/ola-krutrim/krutrim-go-sdk v0.1.1 h1:uGeXa8qe2Co+E4NWC3yyp7M36mp3uxoHqqCM0yiJwwo=
+github.com/ola-krutrim/krutrim-go-sdk v0.1.1/go.mod h1:B7wpr73e5K3ommhFy3ForN+5sVzUWz5U++keuBi6Sa4=
 github.com/pjbgf/sha1cd v0.3.0 h1:4D5XXmUUBUl/xQ6IjCkEAbqXskkq/4O7LmGn0AqMDs4=
 github.com/pjbgf/sha1cd v0.3.0/go.mod h1:nZ1rrWOcGJ5uZgEEVL1VUM9iRQiZvWdbZjkKyFzPPsI=
 github.com/pkg/diff v0.0.0-20210226163009-20ebb0f2a09e/go.mod h1:pJLUxLENpZxwdsKMEsNbx1VGcRFpLqf3715MtcvvzbA=

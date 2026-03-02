@@ -6,7 +6,7 @@ import (
 	"log"
 
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
-	"github.com/ola-silicon/krutrim-terraform/internal"
+	"github.com/ola-krutrim/krutrim-terraform/internal"
 )
 
 var (
@@ -20,7 +20,7 @@ func main() {
 	flag.Parse()
 
 	opts := providerserver.ServeOpts{
-		Address: "registry.terraform.io/ola-silicon/krutrim",
+		Address: "registry.terraform.io/ola-krutrim/krutrim",
 		Debug:   debug,
 	}
 

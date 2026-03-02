@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     krutrim = {
-      source  = "ola-silicon/krutrim"
+      source  = "ola-krutrim/krutrim"
       version = "1.0.0"
     }
   }
