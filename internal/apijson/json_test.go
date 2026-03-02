@@ -19,7 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 
-	"github.com/ola-krutrim/terrafrorm-provider-krutrim/internal/customfield"
+	"github.com/ola-krutrim/terraform-provider-krutrim/internal/customfield"
 )
 
 func P[T any](v T) *T { return &v }

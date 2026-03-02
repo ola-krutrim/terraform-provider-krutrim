@@ -18,7 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 
-	"github.com/ola-krutrim/terrafrorm-provider-krutrim/internal/customfield"
+	"github.com/ola-krutrim/terraform-provider-krutrim/internal/customfield"
 )
 
 var _ codingerror = (*mismatch)(nil)

@@ -14,9 +14,9 @@ import (
 
 	krutrim "github.com/ola-krutrim/krutrim-go-sdk"
 	"github.com/ola-krutrim/krutrim-go-sdk/option"
-	"github.com/ola-krutrim/terrafrorm-provider-krutrim/internal/auth"
+	"github.com/ola-krutrim/terraform-provider-krutrim/internal/auth"
 
-	"github.com/ola-krutrim/terrafrorm-provider-krutrim/internal/resources"
+	"github.com/ola-krutrim/terraform-provider-krutrim/internal/resources"
 )
 
 // Provider implementation
