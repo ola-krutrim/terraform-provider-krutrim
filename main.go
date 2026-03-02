@@ -6,7 +6,7 @@ import (
 	"log"
 
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
-	"github.com/ola-krutrim/krutrim-terraform/internal"
+	"github.com/ola-krutrim/terrafrorm-provider-krutrim/internal"
 )
 
 var (

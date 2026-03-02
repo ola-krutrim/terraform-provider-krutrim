@@ -18,7 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 	"github.com/tidwall/gjson"
 
-	"github.com/ola-krutrim/krutrim-terraform/internal/customfield"
+	"github.com/ola-krutrim/terrafrorm-provider-krutrim/internal/customfield"
 )
 
 // decoders is a synchronized map with roughly the following type:

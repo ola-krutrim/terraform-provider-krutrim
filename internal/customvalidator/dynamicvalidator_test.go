@@ -2,7 +2,7 @@ package customvalidator_test
 
 import (
 	"context"
-	"github.com/ola-krutrim/krutrim-terraform/internal/customvalidator"
+	"github.com/ola-krutrim/terrafrorm-provider-krutrim/internal/customvalidator"
 	"math/big"
 	"testing"
 

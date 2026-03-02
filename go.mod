@@ -1,4 +1,4 @@
-module github.com/ola-krutrim/krutrim-terraform
+module github.com/ola-krutrim/terrafrorm-provider-krutrim
 
 go 1.24.0
 

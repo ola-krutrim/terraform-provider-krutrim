@@ -21,8 +21,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 
-	"github.com/ola-krutrim/krutrim-terraform/internal/apijson"
-	"github.com/ola-krutrim/krutrim-terraform/internal/customfield"
+	"github.com/ola-krutrim/terrafrorm-provider-krutrim/internal/apijson"
+	"github.com/ola-krutrim/terrafrorm-provider-krutrim/internal/customfield"
 )
 
 var encoders sync.Map // map[encoderEntry]encoderFunc

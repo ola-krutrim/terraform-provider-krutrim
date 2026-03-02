@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/ola-krutrim/krutrim-terraform/internal/importpath"
+	"github.com/ola-krutrim/terrafrorm-provider-krutrim/internal/importpath"
 )
 
 func TestParseID(t *testing.T) {
