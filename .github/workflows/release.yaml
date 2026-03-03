@@ -36,9 +36,3 @@ jobs:
         run: |
           cd release
           shasum -a 256 *.zip > SHA256SUMS
-
-      - name: Create GitHub release
-        uses: ncipollo/release-action@v1
-        with:
-          tag: ${{ github.ref_name }}
-          files: release/*
