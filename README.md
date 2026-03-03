@@ -138,5 +138,3 @@ resource "krutrim_instance" "example" {
 - Deletion may fail if dependent resources still exist.
 
 ---
-
-© 2024 Krutrim Cloud
