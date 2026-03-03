@@ -1,64 +1,142 @@
 # Krutrim Terraform Provider
 
-The [Krutrim Terraform provider](https://registry.terraform.io/providers/stainless-sdks/Krutrim/latest/docs) provides convenient access to
-the Krutrim REST API from Terraform.
+The **Krutrim Terraform Provider** allows you to manage infrastructure resources in Krutrim Cloud using Infrastructure as Code (IaC).
 
-It is generated with [Stainless](https://www.stainless.com/).
+This provider enables provisioning and management of:
+
+- Virtual Private Clouds (VPCs)
+- Subnets
+- Virtual Machine Instances
+- Block Storage Volumes
+- Floating IPs
+- Security Groups
+- Security Group Rules
+- SSH Keys
+
+---
 
 ## Requirements
 
-This provider requires Terraform CLI 1.0 or later. You can [install it for your system](https://developer.hashicorp.com/terraform/install)
-on Hashicorp's website.
+- Terraform >= 1.3.0
+- A valid Krutrim Cloud account
 
-## Usage
+---
 
-Add the following to your `main.tf` file:
+## Installation
+
+Add the provider to your Terraform configuration:
 
 ```hcl
-# Declare the provider and version
 terraform {
   required_providers {
-    Krutrim = {
-      source  = "stainless-sdks/Krutrim"
-      version = "~> 0.0.1"
+    krutrim = {
+      source  = "ola-krutrim/krutrim"
+      version = "0.1.1"
     }
   }
 }
-
-# Initialize the provider
-provider "Krutrim" {
-  api_key = "My API Key" # or set Krutrim_API_KEY env variable
-}
-
-# Configure a resource
-
 ```
 
-Initialize your project by running `terraform init` in the directory.
+Then run:
 
-Additional examples can be found in the [./examples](./examples) folder within this repository, and you can
-refer to the full documentation on [the Terraform Registry](https://registry.terraform.io/providers/stainless-sdks/Krutrim/latest/docs).
+```bash
+terraform init
+```
 
-### Provider Options
+---
 
-When you initialize the provider, the following options are supported. It is recommended to use environment variables for sensitive values like access tokens.
-If an environment variable is provided, then the option does not need to be set in the terraform source.
+## Provider Configuration
 
-| Property | Environment variable | Required | Default value |
-| -------- | -------------------- | -------- | ------------- |
-| api_key  | `Krutrim_API_KEY`       | true     | —             |
+```hcl
+provider "krutrim" {
+  base_url = "https://cloud.olakrutrim.com"
 
-## Semantic versioning
+  email        = "your_email_here"
+  password     = "your_password_here"
+  is_root_user = true
+}
+```
 
-This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:
+---
 
-1. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_
-2. Changes that we do not expect to impact the vast majority of users in practice.
+## Provider Arguments
 
-We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
+| Argument       | Type    | Required | Description |
+|---------------|---------|----------|-------------|
+| `base_url`     | String  | Yes      | Base URL of the Krutrim Cloud API |
+| `email`        | String  | Yes      | Login email |
+| `password`     | String  | Yes      | Account password |
+| `is_root_user` | Boolean | Yes      | Set to `true` if authenticating as root user |
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/terraform-provider-krutrim/issues) with questions, bugs, or suggestions.
+---
 
-## Contributing
+## Example: Create a VPC
 
-See [the contributing documentation](./CONTRIBUTING.md).
+```hcl
+resource "krutrim_vpc" "example" {
+  region       = "In-Bangalore-1"
+  name         = "example-vpc"
+  network_name = "example-network"
+
+  subnet_name = "example-subnet"
+  cidr        = "10.0.0.0/24"
+  gateway_ip  = "10.0.0.1"
+}
+```
+
+---
+
+## Example: Create an Instance
+
+```hcl
+resource "krutrim_instance" "example" {
+  region         = "In-Bangalore-1"
+  name           = "example-instance"
+  instance_type  = "standard.medium"
+
+  vpc_id     = krutrim_vpc.example.id
+  subnet_id  = krutrim_vpc.example.subnet_id
+  network_id = krutrim_vpc.example.network_id
+
+  volume_type = "ssd"
+  volume_name = "root-volume"
+
+  floating_ip = true
+}
+```
+
+---
+
+## Supported Resources
+
+- `krutrim_vpc`
+- `krutrim_subnet`
+- `krutrim_instance`
+- `krutrim_volume`
+- `krutrim_floating_ip`
+- `krutrim_security_group`
+- `krutrim_security_group_rule`
+- `krutrim_sshkey`
+
+---
+
+## Supported Data Sources
+
+- `krutrim_vpc`
+- `krutrim_subnet`
+- `krutrim_instance`
+- `krutrim_volume`
+- `krutrim_floating_ip`
+- `krutrim_sshkey`
+
+---
+
+## Notes
+
+- Some resources are created asynchronously and Terraform waits for completion.
+- Certain attributes require resource recreation if modified.
+- Deletion may fail if dependent resources still exist.
+
+---
+
+© 2024 Krutrim Cloud
