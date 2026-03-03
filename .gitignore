@@ -4,4 +4,5 @@ terraform-provider-Krutrim
 .examples/provider/.terraform/
 .examples/provider/.terraform.lock.hcl
 .examples/provider/provider.tf
-
+release
+release.sh
