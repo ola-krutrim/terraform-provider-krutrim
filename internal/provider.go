@@ -14,10 +14,10 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 
-	krutrim "github.com/ola-silicon/krutrim-go-sdk"
-	"github.com/ola-silicon/krutrim-go-sdk/option"
+	krutrim "github.com/ola-krutrim/krutrim-go-sdk"
+	"github.com/ola-krutrim/krutrim-go-sdk/option"
 
-	"github.com/ola-silicon/krutrim-terraform/internal/resources"
+	"github.com/ola-krutrim/terraform-provider-krutrim/internal/resources"
 )
 
 // Provider implementation

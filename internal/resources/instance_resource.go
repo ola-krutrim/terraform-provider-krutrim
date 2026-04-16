@@ -337,8 +337,8 @@ func (r *InstanceResource) Create(
 		Region:       plan.Region.ValueString(),
 		SubnetID:     plan.SubnetID.ValueString(),
 		VpcID:        plan.VpcID.ValueString(),
-		Volumetype: strPtr(plan.VolumeType.ValueString()),
-		VolumeName: strPtr(plan.VolumeName.ValueString()),
+		Volumetype: plan.VolumeType.ValueString(),
+		VolumeName: plan.VolumeName.ValueString(),
 	}
 
 	// Optional string fields
