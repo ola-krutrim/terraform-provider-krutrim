@@ -1,4 +1,4 @@
-version: 2
+version: 1
 
 builds:
   - env:
@@ -13,7 +13,7 @@ builds:
     binary: terraform-provider-krutrim
 
 archives:
-  - formats: ['zip']
+  - format: zip
     name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
 
 checksum:
