@@ -22,6 +22,7 @@ checksum:
 
 signs:
   - artifacts: checksum
+    signature: "${artifact}.sig"
     args:
       - "--batch"
       - "--yes"
@@ -33,3 +34,6 @@ signs:
       - "--detach-sign"
       - "--local-user"
       - "1CEA66C24AC57940"
+      - "--output"
+      - "${signature}"
+      - "${artifact}"
