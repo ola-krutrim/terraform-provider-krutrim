@@ -27,7 +27,7 @@ When destroyed, the instance and optionally its volume are deleted (based on `de
 
 ```hcl
 resource "krutrim_instance" "example" {
-  region         = "ap-south-1"
+  region         = "In-Bangalore-1"
   name           = "my-vm"
   instance_type  = "standard.medium"
 

@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"time"
-
+    "encoding/json"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
@@ -64,7 +64,9 @@ type InstanceModel struct {
 	Status           types.String `tfsdk:"status"`
 	PrivateIPAddress types.String `tfsdk:"private_ip_address"`
 }
-
+func strPtr(s string) *string {
+    return &s
+}
 /*
 =================================================
 Constructor
@@ -335,8 +337,8 @@ func (r *InstanceResource) Create(
 		Region:       plan.Region.ValueString(),
 		SubnetID:     plan.SubnetID.ValueString(),
 		VpcID:        plan.VpcID.ValueString(),
-		Volumetype:   plan.VolumeType.ValueString(),
-		VolumeName:   plan.VolumeName.ValueString(),
+		Volumetype: strPtr(plan.VolumeType.ValueString()),
+		VolumeName: strPtr(plan.VolumeName.ValueString()),
 	}
 
 	// Optional string fields
@@ -521,15 +523,12 @@ func (r *InstanceResource) Create(
 		}
 	
 		// Network
-		if ports, ok := (*instanceData)["network_ports"].([]any); ok && len(ports) > 0 {
-			if port, ok := ports[0].(map[string]any); ok {
-	
-				if v, ok := port["fixed_ip"].(string); ok && v != "" {
-					plan.PrivateIPAddress = types.StringValue(v)
-				}
-	
-				if v, ok := port["floating_ip"].(string); ok && v != "" {
-					plan.FloatingIPAddress = types.StringValue(v)
+		if ipStr, ok := (*instanceData)["ip_addresses"].(string); ok && ipStr != "" {
+			var ips []map[string]any
+			err := json.Unmarshal([]byte(ipStr), &ips)
+			if err == nil && len(ips) > 0 {
+				if ip, ok := ips[0]["ip"].(string); ok {
+					plan.PrivateIPAddress = types.StringValue(ip)
 				}
 			}
 		}
@@ -598,15 +597,12 @@ func (r *InstanceResource) Read(
 		state.Status = types.StringValue(v)
 	}
 	
-	if ports, ok := (*res)["network_ports"].([]any); ok && len(ports) > 0 {
-		if port, ok := ports[0].(map[string]any); ok {
-	
-			if v, ok := port["fixed_ip"].(string); ok {
-				state.PrivateIPAddress = types.StringValue(v)
-			}
-	
-			if v, ok := port["floating_ip"].(string); ok {
-				state.FloatingIPAddress = types.StringValue(v)
+	if ipStr, ok := (*res)["ip_addresses"].(string); ok && ipStr != "" {
+		var ips []map[string]any
+		err := json.Unmarshal([]byte(ipStr), &ips)
+		if err == nil && len(ips) > 0 {
+			if ip, ok := ips[0]["ip"].(string); ok {
+				state.PrivateIPAddress = types.StringValue(ip)
 			}
 		}
 	}

@@ -1,3 +1,4 @@
+
 package resources
 
 import (
@@ -500,17 +501,57 @@ func (r *VPCResource) Create(
 		return
 	}
 	if subnetID == "" {
-		// Terraform warning (shown to user)
-		resp.Diagnostics.AddWarning(
-			"VPC subnet creation skipped",
-			"The subnet requested during VPC creation was not provisioned by the VPC API. "+
-				"If you are managing subnets using krutrim_subnet, this warning can be safely ignored.",
+		// CALL DescribeVpc API
+		var describeResp *http.Response
+	
+		err := r.client.DescribeVpc.Get(
+			ctx,
+			krutrim.DescribeVpcGetParams{
+				VpcID:   vpcID,
+				VpcName: "",
+				XRegion: plan.Region.ValueString(),
+			},
+			option.WithResponseInto(&describeResp),
 		)
 	
-		// Provider log (for debugging)
-		tflog.Warn(ctx, "Subnet was not created during VPC creation", map[string]interface{}{
-			"vpc_id": vpcID,
-		})
+		if err == nil && describeResp != nil {
+			defer describeResp.Body.Close()
+		
+			body, _ := io.ReadAll(describeResp.Body)
+	
+			var raw map[string]interface{}
+			err = json.Unmarshal(body, &raw)
+			if err != nil {
+				resp.Diagnostics.AddError(
+					"JSON Parse Error",
+					err.Error(),
+				)
+				return
+			}
+	
+			// LOOP over response
+			for _, v := range raw {
+				if vpcData, ok := v.(map[string]interface{}); ok {
+	
+					if subnets, ok := vpcData["subnets"].([]interface{}); ok && len(subnets) > 0 {
+						if subnet, ok := subnets[0].(map[string]interface{}); ok {
+							if krn, ok := subnet["krn_id"].(string); ok {
+								subnetID = krn
+							}
+						}
+					}
+				}
+			}
+		}
+	
+		// FAIL if still empty
+		if subnetID == "" {
+			resp.Diagnostics.AddError(
+				"Subnet Error",
+				"Subnet was created but not fetched",
+			)
+			return
+		}
 	}
 
 	// Update state with created resource IDs
