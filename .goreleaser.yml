@@ -1,4 +1,4 @@
-version: 1
+version: 2
 
 builds:
   - env:
@@ -24,9 +24,8 @@ signs:
   - artifacts: checksum
     args:
       - "--batch"
-      - "--local-user"
-      - "{{ .Env.GPG_FINGERPRINT }}"
-      - "--output"
-      - "${signature}"
+      - "--yes"
+      - "--armor"
       - "--detach-sign"
-      - "${artifact}"
+      - "--local-user"
+      - "1CEA66C24AC57940"
