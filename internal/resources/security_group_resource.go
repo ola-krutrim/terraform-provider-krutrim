@@ -10,7 +10,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	krutrim "github.com/ola-krutrim/krutrim-go-sdk"
-	"github.com/ola-krutrim/krutrim-go-sdk/packages/param"
 )
 
 type SecurityGroupModel struct {
@@ -97,7 +96,7 @@ func (r *SecurityGroupResource) Create(
 	}
 
 	if !plan.Description.IsNull() && plan.Description.ValueString() != "" {
-		params.Description = param.NewOpt(plan.Description.ValueString())
+		params.Description = plan.Description.ValueString()
 	}
 
 	sg, err := r.client.SecurityGroup.V1.New(ctx, params) 

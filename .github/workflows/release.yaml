@@ -5,34 +5,36 @@ on:
     tags:
       - 'v*.*.*'
 
+permissions:
+  contents: write
+
 jobs:
-  build-and-release:
+  goreleaser:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
           go-version-file: ./go.mod
 
-      - name: Build Terraform provider
-        run: |
-          VERSION=${GITHUB_REF#refs/tags/}
-          mkdir -p release
-          # Linux
-          GOOS=linux GOARCH=amd64 go build -o release/terraform-provider-krutrim_${VERSION}_linux_amd64
-          zip -j release/terraform-provider-krutrim_${VERSION}_linux_amd64.zip release/terraform-provider-krutrim_${VERSION}_linux_amd64
-          # macOS
-          GOOS=darwin GOARCH=amd64 go build -o release/terraform-provider-krutrim_${VERSION}_darwin_amd64
-          zip -j release/terraform-provider-krutrim_${VERSION}_darwin_amd64.zip release/terraform-provider-krutrim_${VERSION}_darwin_amd64
-          # Windows
-          GOOS=windows GOARCH=amd64 go build -o release/terraform-provider-krutrim_${VERSION}_windows_amd64.exe
-          zip -j release/terraform-provider-krutrim_${VERSION}_windows_amd64.zip release/terraform-provider-krutrim_${VERSION}_windows_amd64.exe
+      - name: Import GPG key
+        id: import_gpg
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
 
-      - name: Generate SHA256SUMS
-        run: |
-          cd release
-          shasum -a 256 *.zip > SHA256SUMS
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v5
+        with:
+          version: latest
+          args: release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GPG_FINGERPRINT: ${{ steps.import_gpg.outputs.fingerprint }}
