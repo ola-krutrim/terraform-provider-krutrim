@@ -19,7 +19,7 @@ import (
 
 	"github.com/ola-krutrim/terraform-provider-krutrim/internal/resources"
 )
-
+ 
 // Provider implementation
 type KrutrimProvider struct {
 	version string
