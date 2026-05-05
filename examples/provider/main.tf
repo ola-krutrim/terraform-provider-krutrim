@@ -1,0 +1,5 @@
+resource "krutrim_sshkey" "key1" {
+  key_name   = "tf-key"
+  region     = "In-Hyderabad-1"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDOonubC77bNAzAoIltXrz2zIHQys3jMxYi00O1mGdQbBieH6xW9qitZFAOSmuPWPLXZngpOWIM48OQa2zOt9Z/xUFyQOmDw1T77foDxmMcgbgVk61cdzXigFOjsJkB9BB98xMrz7iQUr94Vd7spviuiU615va2fJd3Mn+Es5HVx0QgADa529ZCcJIONUgg8OswIR1zoDNE/Ul/aguBZCpbFlomkUXt0z1ydyWOGbkjVsedEIbFpvt6gLvXrNwjAyuXg+t35wN4IrkO+RFirhSjfTrrCupA63HBy0LBf05rmNjRbLEVruEkObgXirpMBwoeT28FcTtsg8HZ7hsTqA02tn2O/cMiQoyH0mqeYzTN56WY+kZZ2L3yrc9JTCyz6nNU9XuM+P9rw8kT6DITFAElf8C3AzOvNnXbt2q6HmQvcxBUNsFTzn/0Pu6UvFK0pJkiDlyfhMr1fJ13Mf6vVmMqEHZF6JyX4mpbm3LYGoROwSxlnU3YljZ6FibrPKy0Hm0= sri.s2@C02DD4A2MD6M.local"
+}
