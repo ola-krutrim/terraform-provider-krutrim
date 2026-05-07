@@ -32,7 +32,7 @@ signs:
       - "${GPG_PASSPHRASE}"
       - "--detach-sign"
       - "--local-user"
-      - "1CEA66C24AC57940"
+      - "3B7349CD94314A21"
       - "--output"
       - "${signature}"
       - "${artifact}"
