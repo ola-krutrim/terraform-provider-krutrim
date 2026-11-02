@@ -216,6 +216,11 @@ func (p *KrutrimProvider) Resources(
 		resources.NewIAMRoleResource,
 		resources.NewIAMUserRoleBindingResource,
 		resources.NewIAMProgrammaticAccessResource,
+
+		// KKS
+		resources.NewKKSClusterResource,
+		resources.NewKKSNodeGroupResource,
+		resources.NewKKSAddonResource,
 	}
 }
 
@@ -226,6 +231,8 @@ func (p *KrutrimProvider) DataSources(ctx context.Context) []func() datasource.D
 	return []func() datasource.DataSource{
 		resources.NewIAMPoliciesDataSource,
 		resources.NewIAMRolesDataSource,
+		resources.NewKKSFlavorsDataSource,
+		resources.NewKKSAddonsDataSource,
 	}
 }
 
